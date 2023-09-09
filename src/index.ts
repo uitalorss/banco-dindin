@@ -1,8 +1,9 @@
 import express from "express";
-import { userRoutes } from "./routes/users.routes";
+import { categoriesRouter } from "./routes/categories.routes";
 
 const app = express();
 app.use(express.json());
-app.use(userRoutes);
+app.use("/categories", categoriesRouter);
+
 
 app.listen(3000);
