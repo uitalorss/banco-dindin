@@ -18,4 +18,12 @@ export class UsersRepository {
         const {senha: _, ...dadosUsuario} = user[0];
         return dadosUsuario;
     }
+
+    async findByEmail(email: string){
+        const user = await pool.query("select * from usuarios where email = $1", [email]);
+        if(user.rowCount === 0){
+            return false
+        }
+        return user.rows[0];
+    }
 }
