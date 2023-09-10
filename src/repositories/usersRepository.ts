@@ -13,10 +13,9 @@ export class UsersRepository {
         return UsersRepository.instance;
     }
 
-    async create({name, email, password}: userModel){
-        const {rows: user} = await pool.query("insert into usuarios (nome, email, senha) values ($1, $2, $3) returning *", [name, email, password]);
+    async create({name, email, passwordEncripted}: userModel){
+        const {rows: user} = await pool.query("insert into usuarios (nome, email, senha) values ($1, $2, $3) returning *", [name, email, passwordEncripted]);
         const {senha: _, ...dadosUsuario} = user[0];
-        console.log(dadosUsuario);
         return dadosUsuario;
     }
 }

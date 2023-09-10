@@ -8,4 +8,10 @@ export const createUserSchema = z.object({
     })
 })
 
-export type userModel = z.infer<typeof createUserSchema>["body"];
+export const userSchema = z.object({
+    name: z.string().nonempty(),
+    email: z.string().email({message: "Informe um email válido"}),
+    passwordEncripted: z.string().nonempty()
+})
+
+export type userModel = z.infer<typeof userSchema>;

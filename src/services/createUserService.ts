@@ -1,4 +1,5 @@
 import { UsersRepository } from "../repositories/usersRepository";
+import { encriptPassword } from "../utils/encriptPassword";
 
 interface IUserModel {
     name: string;
@@ -14,6 +15,7 @@ export class CreateUserService {
     }
 
     async execute({name, email, password}: IUserModel){
-        return await this.usersRepository.create({name, email, password})
+        const passwordEncripted = await encriptPassword(password)
+        return await this.usersRepository.create({name, email, passwordEncripted})
     }
 }
